@@ -1,6 +1,6 @@
 ---
 - name: copy keys onto workstation
-  uri:
+  get_url:
     url: "http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/{{ item }}"
     dest: /home/cloud-user/.ssh/
   loop:
