@@ -1,3 +1,5 @@
+- import_playbook: add_workstation.yml
+
 - hosts: workstation
   become: yes
   roles:
