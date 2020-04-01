@@ -1,11 +1,11 @@
 ---
 - name: copy keys onto workstation
-  copy:
-    src: "{{ item }}"
+  uri:
+    url: "http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/{{ item }}"
     dest: /home/cloud-user/.ssh/
   loop:
-  - /root/.ssh/openstack.pub
-  - /root/.ssh/openstack.pem
+  - openstack.pub
+  - openstack.pem
 
 - name: inject openstack keys
   os_keypair:
