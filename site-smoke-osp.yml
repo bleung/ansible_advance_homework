@@ -1,17 +1,26 @@
+- import_playbook: add_workstation.yml
+
 - hosts: workstation
   gather_facts: false
   tasks:
   - name: OpenStack servers
-    os_server_facts:
+    os_server_info:
      cloud: ospcloud
      server: 'frontend'
     register: openstack_info
     tags:
       - osp.smoke
   - name: Curl website
-
+    uri:
+      url: "http://{{ item.public_v4 }}"
+      return_content: yes
+    loop: "{{ openstack_info.openstack_servers }}"
+    register: webpage
+    tags:
+      - osp.smoke
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
+      msg: "smoke test fails"
     when: "'Ansible has done its job' not in webpage.results[0].content"
     tags:
       - osp.smoke

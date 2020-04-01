@@ -7,8 +7,9 @@
 - name: Install openstacksdk library
   pip:
     name: openstacksdk
-    state: latest
-    extra_args: -U
+    state: present
+#    extra_args: -U    
+    version: 0.12.0
 - name: Create clouds.yaml file
   blockinfile:
     create: yes
@@ -23,6 +24,10 @@
             username: admin
           identity_api_version: '3.0'
           region_name: RegionOne
+      ansible:
+        use_hostnames: True
+        expand_hostvars: False
+        fail_on_errors: True
 - name: Set openstack.pub authorized key from file
   authorized_key:
     user: cloud-user
