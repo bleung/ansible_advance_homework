@@ -1,11 +1,8 @@
-- import_playbook: add_workstation.yml
-
 - hosts: workstation
   gather_facts: true
+  ignore_unreachable: yes
   roles:
   - name: osp-facts
-# Setup front-end load balancer tier
-
 
 - name: setup load-balancer tier
   hosts: frontends

@@ -1,0 +1,6 @@
+[workstation]
+workstation-dba2.rhpds.opentlc.com
+
+[workstation:vars]
+ansible_user=cloud-user
+ansible_private_key_file=/root/.ssh/openstack.pem
