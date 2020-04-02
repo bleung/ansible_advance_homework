@@ -1,13 +1,13 @@
-- hosts: frontends
+- hosts: localhost
   gather_facts: false
   tasks:
   - name: Use Uri module for wrting smoke test.
     uri:
-      url: "http://{{ inventory_hostname }}"
+      url: "http://34.196.225.30"
       return_content: yes
     register: webpage
 
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
       msg: "smoke test fails"
-    when: "'Ansible has done its job' not in webpage.results[0].content"   
+    when: "'Ansible has done its job' not in webpage.content"   
